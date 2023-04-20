@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
 import { MoodOptionType } from '../types';
+import { theme } from '../theme';
 
 const moodOptions: MoodOptionType[] = [
   { emoji: '🧑‍💻', description: 'studious' },
@@ -10,10 +11,22 @@ const moodOptions: MoodOptionType[] = [
   { emoji: '😤', description: 'frustrated' },
 ];
 
-export const MoodPicker: React.FC = () => {
+type MoodPickerProps = {
+  handleSelectMood: (moodOption: MoodOptionType) => void;
+};
+
+export const MoodPicker: React.FC<MoodPickerProps> = ({ handleSelectMood }) => {
   const [selectedMood, setSelectedMood] = useState<MoodOptionType>();
+
+  const handleSelect = useCallback(() => {
+    if (selectedMood) {
+      handleSelectMood(selectedMood);
+      setSelectedMood(undefined);
+    }
+  }, [handleSelectMood, selectedMood]);
   return (
     <View style={styles.container}>
+      <Text style={styles.heading}>How are you right now?</Text>
       <View style={styles.moodList}>
         {moodOptions.map(mood => (
           <View key={mood.emoji}>
@@ -35,7 +48,7 @@ export const MoodPicker: React.FC = () => {
           </View>
         ))}
       </View>
-      <Pressable style={styles.chooser}>
+      <Pressable style={styles.chooser} onPress={handleSelect}>
         <Text style={styles.chooserText}>Choose</Text>
       </Pressable>
     </View>
@@ -43,9 +56,11 @@ export const MoodPicker: React.FC = () => {
 };
 const styles = StyleSheet.create({
   container: {
-    borderWidth: 3,
+    borderWidth: 2,
+    borderColor: theme.colorPurple,
+    margin: 10,
     borderRadius: 10,
-    borderColor: '#454C73',
+    padding: 20,
   },
   moodText: {
     fontSize: 24,
@@ -54,7 +69,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: 20,
   },
   moodItem: {
     width: 60,
@@ -66,25 +80,33 @@ const styles = StyleSheet.create({
   },
   selectedMoodItem: {
     borderWidth: 2,
-    backgroundColor: '#454C73',
-    borderColor: '#fff',
+    backgroundColor: theme.colorPurple,
+    borderColor: theme.colorWhite,
   },
   descriptionText: {
-    color: '#454C73',
+    color: theme.colorPurple,
     fontWeight: 'bold',
     fontSize: 10,
     textAlign: 'center',
   },
+  heading: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    letterSpacing: 1,
+    textAlign: 'center',
+    marginBottom: 20,
+  },
   chooser: {
-    backgroundColor: '#454C73',
-    padding: 20,
+    backgroundColor: theme.colorPurple,
+    width: 150,
     borderRadius: 20,
-    margin: 40,
-    alignItems: 'center',
+    marginTop: 20,
+    alignSelf: 'center',
+    padding: 10,
   },
   chooserText: {
-    color: '#fff',
+    color: theme.colorWhite,
+    textAlign: 'center',
     fontWeight: 'bold',
-    fontSize: 20,
   },
 });
