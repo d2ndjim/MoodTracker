@@ -35,11 +35,11 @@ const styles = StyleSheet.create({
   },
   moodItem: {
     backgroundColor: 'white',
-    marginBottom: 10,
-    padding: 10,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    // marginBottom: 10,
+    // padding: 10,
+    // flexDirection: 'row',
+    // justifyContent: 'space-between',
+    // alignItems: 'center',
   },
   moodDescription: {
     fontSize: 18,

@@ -103,7 +103,6 @@ const styles = StyleSheet.create({
   },
   descriptionText: {
     color: theme.colorPurple,
-    fontWeight: 'bold',
     fontSize: 10,
     textAlign: 'center',
     fontFamily: theme.fontFamilyBold,
