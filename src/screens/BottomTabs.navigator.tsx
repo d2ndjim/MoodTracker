@@ -39,9 +39,21 @@ export const BottomTabsNavigator: React.FC = (): React.ReactElement => {
           return renderTabBarIcon(route, color, size);
         },
       })}>
-      <BottomTabs.Screen name="Home" component={Home} />
-      <BottomTabs.Screen name="History" component={History} />
-      <BottomTabs.Screen name="Analytics" component={Analytics} />
+      <BottomTabs.Screen
+        name="Home"
+        component={Home}
+        options={{ title: "Today's Mood" }}
+      />
+      <BottomTabs.Screen
+        name="History"
+        component={History}
+        options={{ title: 'Past Moods' }}
+      />
+      <BottomTabs.Screen
+        name="Analytics"
+        component={Analytics}
+        options={{ title: 'Fancy Charts' }}
+      />
     </BottomTabs.Navigator>
   );
 };
