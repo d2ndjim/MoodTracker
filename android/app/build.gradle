@@ -58,6 +58,11 @@ react {
  * use App Bundles (https://developer.android.com/guide/app-bundle/)
  * and want to have separate APKs to upload to the Play Store.
  */
+
+project.ext.react = [
+  enableHermes: true 
+]
+
 def enableSeparateBuildPerCPUArchitecture = false
 
 /**
